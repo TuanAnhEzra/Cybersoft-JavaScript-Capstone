@@ -8,15 +8,14 @@ function ProductCard({ phone }) {
 
   return (
     <div className="product-card">
-
-      <img src={phone.image} alt={phone.name} />
+      <img src={phone.img} alt={phone.name} />
 
       <h3>{phone.name}</h3>
 
       <ul className="spec">
-        <li>Chip: {phone.chip}</li>
-        <li>RAM: {phone.ram}</li>
-        <li>Camera: {phone.camera}</li>
+        <li>Màn hình: {phone.screen}</li>
+        <li>Camera sau: {phone.backCamera}</li>
+        <li>Camera trước: {phone.frontCamera}</li>
       </ul>
 
       <p className="price">
@@ -26,7 +25,6 @@ function ProductCard({ phone }) {
       <button onClick={() => addToCart(phone)}>
         Thêm vào giỏ
       </button>
-
     </div>
   );
 }

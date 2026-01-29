@@ -48,7 +48,7 @@ function ProductTable({ onEdit }) {
     .sort((a, b) => sortOrder === 'asc' ? a.price - b.price : b.price - a.price);
 
   if (loading) return <div className="text-center py-10">Đang tải sản phẩm...</div>;
-  
+
   return (
     <>
       {/* Search and Sort */}
@@ -62,9 +62,10 @@ function ProductTable({ onEdit }) {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Tên</th>
-            <th>Giá</th>
-            <th>Thương Hiệu</th>
+            <th>Tên (name)</th>
+            <th>Giá (price)</th>
+            <th>Loại (type)</th>
+            <th>Mô tả (desc)</th>  {/* Optional: add more if you want */}
             <th>Hành Động</th>
           </tr>
         </thead>
@@ -74,7 +75,8 @@ function ProductTable({ onEdit }) {
               <td>{product.id}</td>
               <td>{product.name}</td>
               <td>{product.price.toLocaleString()} đ</td>
-              <td>{product.brand}</td>
+              <td>{product.type}</td>
+              <td>{product.desc}</td>  {/* Optional */}
               <td>
                 <button onClick={() => onEdit(product)}>Sửa</button>
                 <button onClick={() => deleteProduct(product.id)}>Xóa</button>

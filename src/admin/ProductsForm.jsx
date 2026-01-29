@@ -8,22 +8,22 @@ function ProductForm({ onRefresh, editingProduct }) {
   const [formData, setFormData] = useState(editingProduct || {
     name: '',
     price: '',
-    chip: '',
-    ram: '',
-    camera: '',
-    image: '',
-    brand: '',
+    screen: '',
+    backCamera: '',
+    frontCamera: '',
+    img: '',
+    desc: '',
+    type: '',
   });
   const [error, setError] = useState('');
-  const [editingId, setEditingId] = useState(editingProduct ? editingProduct.id : null);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const validateForm = () => {
-    if (!formData.name || !formData.price || !formData.brand) {
-      setError('Tên, Giá, và Thương Hiệu là bắt buộc!');
+    if (!formData.name || !formData.price || !formData.type) {
+      setError('Tên, Giá, và Loại (Type) là bắt buộc!');
       return false;
     }
     if (isNaN(formData.price) || formData.price <= 0) {
@@ -39,44 +39,46 @@ function ProductForm({ onRefresh, editingProduct }) {
     if (!validateForm()) return;
 
     try {
-      if (editingId) {
-        await axios.put(`${BASE_URL}/${editingId}`, formData);
+      if (editingProduct?.id) {
+        await axios.put(`${BASE_URL}/${editingProduct.id}`, formData);
       } else {
         await axios.post(BASE_URL, formData);
       }
       setFormData({
         name: '',
         price: '',
-        chip: '',
-        ram: '',
-        camera: '',
-        image: '',
-        brand: '',
+        screen: '',
+        backCamera: '',
+        frontCamera: '',
+        img: '',
+        desc: '',
+        type: '',
       });
-      setEditingId(null);
       onRefresh();
     } catch (err) {
       console.error('Lỗi khi lưu sản phẩm:', err);
+      setError('Lỗi khi lưu - kiểm tra kết nối hoặc dữ liệu!');
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="product-form">
-      <input name="name" value={formData.name} onChange={handleInputChange} placeholder="Tên sản phẩm" />
-      <input name="price" value={formData.price} onChange={handleInputChange} placeholder="Giá (đ)" type="number" />
-      <input name="chip" value={formData.chip} onChange={handleInputChange} placeholder="Chip" />
-      <input name="ram" value={formData.ram} onChange={handleInputChange} placeholder="RAM" />
-      <input name="camera" value={formData.camera} onChange={handleInputChange} placeholder="Camera" />
-      <input name="image" value={formData.image} onChange={handleInputChange} placeholder="URL hình ảnh" />
-      <select name="brand" value={formData.brand} onChange={handleInputChange}>
-        <option value="">Chọn thương hiệu</option>
-        <option value="iphone">iPhone</option>
-        <option value="samsung">Samsung</option>
-        <option value="oppo">OPPO</option>
-        <option value="xiaomi">Xiaomi</option>
+      <input name="name" value={formData.name} onChange={handleInputChange} placeholder="Tên sản phẩm (name)" required />
+      <input name="price" value={formData.price} onChange={handleInputChange} placeholder="Giá (price)" type="number" required />
+      <input name="screen" value={formData.screen} onChange={handleInputChange} placeholder="Màn hình (screen)" />
+      <input name="backCamera" value={formData.backCamera} onChange={handleInputChange} placeholder="Camera sau (backCamera)" />
+      <input name="frontCamera" value={formData.frontCamera} onChange={handleInputChange} placeholder="Camera trước (frontCamera)" />
+      <input name="img" value={formData.img} onChange={handleInputChange} placeholder="URL hình ảnh (img)" />
+      <input name="desc" value={formData.desc} onChange={handleInputChange} placeholder="Mô tả (desc)" />
+      <select name="type" value={formData.type} onChange={handleInputChange} required>
+        <option value="">Chọn loại (type)</option>
+        <option value="Iphone">Iphone</option>
+        <option value="Samsung">Samsung</option>
+        <option value="OPPO">OPPO</option>
+        <option value="Xiaomi">Xiaomi</option>
       </select>
       {error && <p className="error">{error}</p>}
-      <button type="submit">{editingId ? 'Cập Nhật' : 'Thêm Sản Phẩm'}</button>
+      <button type="submit">{editingProduct ? 'Cập Nhật' : 'Thêm Sản Phẩm'}</button>
     </form>
   );
 }
