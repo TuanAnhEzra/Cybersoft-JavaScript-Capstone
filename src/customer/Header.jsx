@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import "./Header.css";
+import "../assets/css/Header.css";
 
 export default function Header() {
   const { totalQty } = useContext(CartContext);

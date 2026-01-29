@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
-import "./Cart.css";
+import "../assets/css/Cart.css";
 
 export default function Cart() {
   const {

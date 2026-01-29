@@ -1,4 +1,4 @@
-import "./BrandFilter.css";
+import "../assets/css/BrandFilter.css";
 
 function BrandFilter({ current, onChange }) {
   return (
