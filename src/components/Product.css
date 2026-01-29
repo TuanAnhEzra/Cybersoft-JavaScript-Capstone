@@ -1,0 +1,95 @@
+/* Căn giữa toàn bộ danh sách */
+.product-list {
+  max-width: 1300px;
+  margin: 0 auto; /* căn giữa màn hình */
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+
+  padding: 30px;
+}
+
+/* Card sản phẩm */
+.product-card {
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+
+  transition: 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Ảnh */
+.product-card img {
+  width: 100%;
+  height: 220px;
+
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+/* Tên */
+.product-card h3 {
+  font-size: 17px;
+  font-weight: 600;
+
+  margin: 8px 0;
+  min-height: 45px;
+}
+
+/* Thông số */
+.spec {
+  list-style: none;
+  padding: 0;
+
+  font-size: 14px;
+  color: #444;
+
+  margin: 5px 0 10px;
+}
+
+.spec li {
+  margin: 4px 0;
+}
+
+/* Giá */
+.price {
+  font-size: 19px;
+  font-weight: bold;
+  color: #d70018;
+
+  margin-bottom: 10px;
+}
+
+/* Nút */
+.product-card button {
+  margin-top: auto;
+
+  padding: 10px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #d70018;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.product-card button:hover {
+  background: #b80014;
+}
