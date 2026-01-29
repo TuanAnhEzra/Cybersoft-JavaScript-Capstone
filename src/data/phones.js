@@ -8,7 +8,7 @@ const phones = [
     ram: "8GB",
     camera: "48MP",
     image:
-      "src/img/OIP.webp",
+      "src/assets/img/OIP.webp",
   },
 
   {
@@ -20,7 +20,7 @@ const phones = [
     ram: "12GB",
     camera: "200MP",
     image:
-      "src/img/s24.webp",
+      "src/assets/img/s24.webp",
   },
 
   {
@@ -32,7 +32,7 @@ const phones = [
     ram: "6GB",
     camera: "12MP",
     image:
-      "src/img/i14.webp",
+      "src/assets/img/i14.webp",
   },
 
   {
@@ -44,7 +44,7 @@ const phones = [
     ram: "8GB",
     camera: "50MP",
     image:
-      "src/img/ss54.webp",
+      "src/assets/img/ss54.webp",
   },
 
   {
@@ -56,7 +56,7 @@ const phones = [
     ram: "6GB",
     camera: "12MP",
     image:
-      "src/img/i13pro.webp",
+      "src/assets/img/i13pro.webp",
   },
 
   {
@@ -68,7 +68,7 @@ const phones = [
     ram: "12GB",
     camera: "50MP",
     image:
-      "src/img/ssz5.webp",
+      "src/assets/img/ssz5.webp",
   },
 
   {
@@ -80,7 +80,7 @@ const phones = [
     ram: "12GB",
     camera: "50MP",
     image:
-      "src/img/xiao.webp",
+      "src/assets/img/xiao.webp",
   },
 
   {
@@ -92,7 +92,7 @@ const phones = [
     ram: "12GB",
     camera: "50MP",
     image:
-      "src/img/oppo.webp",
+      "src/assets/img/oppo.webp",
   },
 ];
 
