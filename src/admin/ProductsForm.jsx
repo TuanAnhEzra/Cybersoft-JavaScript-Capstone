@@ -4,7 +4,7 @@ import '../assets/css/Admin.css';
 
 const BASE_URL = 'https://696e1a09d7bacd2dd715c0a3.mockapi.io/api/v1/phone';
 
-function ProductForm({ onRefresh, editingProduct }) {
+function ProductForm({ onRefresh, editingProduct, onClearEdit }) {
   const [formData, setFormData] = useState({
     name: '',
     price: '',
@@ -32,19 +32,24 @@ function ProductForm({ onRefresh, editingProduct }) {
       });
       setIsEditing(true);
     } else {
-      setFormData({
-        name: '',
-        price: '',
-        screen: '',
-        backCamera: '',
-        frontCamera: '',
-        img: '',
-        desc: '',
-        type: '',
-      });
-      setIsEditing(false);
+      resetForm();
     }
   }, [editingProduct]);
+
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      price: '',
+      screen: '',
+      backCamera: '',
+      frontCamera: '',
+      img: '',
+      desc: '',
+      type: '',
+    });
+    setIsEditing(false);
+    setError('');
+  };
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -79,8 +84,9 @@ function ProductForm({ onRefresh, editingProduct }) {
       } else {
         await axios.post(BASE_URL, submitData);
       }
+      resetForm();
+      onClearEdit();
       onRefresh();
-      setIsEditing(false);
     } catch (err) {
       console.error('Lỗi khi lưu sản phẩm:', err);
       setError('Lỗi khi lưu - kiểm tra kết nối!');

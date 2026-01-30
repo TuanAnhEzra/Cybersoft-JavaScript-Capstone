@@ -13,6 +13,10 @@ function Admin() {
     setEditingProduct(product);
   };
 
+  const handleClearEdit = () => {
+    setEditingProduct(null);
+  };
+
   const handleRefresh = () => {
     setRefreshKey((prev) => prev + 1);
   };
@@ -30,8 +34,8 @@ function Admin() {
 
           {/* Menu */}
           <nav className="nav-menu">
-            <Link to="/">Trang chủ</Link>
-            
+            <Link to="/">Home</Link>
+
           </nav>
 
         </div>
@@ -50,6 +54,7 @@ function Admin() {
             <ProductForm
               onRefresh={handleRefresh}
               editingProduct={editingProduct}
+              onClearEdit={handleClearEdit}
             />
           </div>
         </div>

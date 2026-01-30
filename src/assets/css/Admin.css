@@ -67,6 +67,7 @@
   margin-right: 5px;
   padding: 5px 10px;
   cursor: pointer;
+  border: none;
 }
 
 .product-table button:first-child {

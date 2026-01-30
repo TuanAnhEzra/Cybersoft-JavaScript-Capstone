@@ -65,7 +65,7 @@ function ProductTable({ onEdit }) {
             <th>Tên (name)</th>
             <th>Giá (price)</th>
             <th>Loại (type)</th>
-            <th>Mô tả (desc)</th>  {/* Optional: add more if you want */}
+            <th>Mô tả (desc)</th>
             <th>Hành Động</th>
           </tr>
         </thead>
