@@ -3,7 +3,7 @@ import ProductForm from "../admin/ProductsForm";
 import ProductTable from "../admin/ProductTable";
 import { Link } from "react-router-dom";
 
-import "./admin.css";
+import "../assets/css/Admin.css";
 
 function Admin() {
   const [editingProduct, setEditingProduct] = useState(null);
