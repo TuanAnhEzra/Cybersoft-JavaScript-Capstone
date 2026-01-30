@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../assets/css/Admin.css';
 
 const BASE_URL = 'https://696e1a09d7bacd2dd715c0a3.mockapi.io/api/v1/phone';
 
 function ProductForm({ onRefresh, editingProduct }) {
-  const [formData, setFormData] = useState(editingProduct || {
+  const [formData, setFormData] = useState({
     name: '',
     price: '',
     screen: '',
@@ -16,6 +16,35 @@ function ProductForm({ onRefresh, editingProduct }) {
     type: '',
   });
   const [error, setError] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (editingProduct) {
+      setFormData({
+        name: editingProduct.name || '',
+        price: editingProduct.price ? editingProduct.price.toString() : '',
+        screen: editingProduct.screen || '',
+        backCamera: editingProduct.backCamera || '',
+        frontCamera: editingProduct.frontCamera || '',
+        img: editingProduct.img || '',
+        desc: editingProduct.desc || '',
+        type: editingProduct.type || '',
+      });
+      setIsEditing(true);
+    } else {
+      setFormData({
+        name: '',
+        price: '',
+        screen: '',
+        backCamera: '',
+        frontCamera: '',
+        img: '',
+        desc: '',
+        type: '',
+      });
+      setIsEditing(false);
+    }
+  }, [editingProduct]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,10 +52,11 @@ function ProductForm({ onRefresh, editingProduct }) {
 
   const validateForm = () => {
     if (!formData.name || !formData.price || !formData.type) {
-      setError('Tên, Giá, và Loại (Type) là bắt buộc!');
+      setError('Tên, Giá, và Loại là bắt buộc!');
       return false;
     }
-    if (isNaN(formData.price) || formData.price <= 0) {
+    const priceNum = parseFloat(formData.price.replace(/\./g, ''));
+    if (isNaN(priceNum) || priceNum <= 0) {
       setError('Giá phải là số dương!');
       return false;
     }
@@ -38,32 +68,28 @@ function ProductForm({ onRefresh, editingProduct }) {
     e.preventDefault();
     if (!validateForm()) return;
 
+    const submitData = {
+      ...formData,
+      price: parseFloat(formData.price.replace(/\./g, '')),
+    };
+
     try {
-      if (editingProduct?.id) {
-        await axios.put(`${BASE_URL}/${editingProduct.id}`, formData);
+      if (isEditing) {
+        await axios.put(`${BASE_URL}/${editingProduct.id}`, submitData);
       } else {
-        await axios.post(BASE_URL, formData);
+        await axios.post(BASE_URL, submitData);
       }
-      setFormData({
-        name: '',
-        price: '',
-        screen: '',
-        backCamera: '',
-        frontCamera: '',
-        img: '',
-        desc: '',
-        type: '',
-      });
       onRefresh();
+      setIsEditing(false);
     } catch (err) {
       console.error('Lỗi khi lưu sản phẩm:', err);
-      setError('Lỗi khi lưu - kiểm tra kết nối hoặc dữ liệu!');
+      setError('Lỗi khi lưu - kiểm tra kết nối!');
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="product-form">
-      <input name="name" value={formData.name} onChange={handleInputChange} placeholder="Tên sản phẩm (name)" required />
+      <input name="name" value={formData.name} onChange={handleInputChange} placeholder="Tên sản phẩm" required />
       <input name="price" value={formData.price} onChange={handleInputChange} placeholder="Giá (price)" type="number" required />
       <input name="screen" value={formData.screen} onChange={handleInputChange} placeholder="Màn hình (screen)" />
       <input name="backCamera" value={formData.backCamera} onChange={handleInputChange} placeholder="Camera sau (backCamera)" />
@@ -78,7 +104,7 @@ function ProductForm({ onRefresh, editingProduct }) {
         <option value="Xiaomi">Xiaomi</option>
       </select>
       {error && <p className="error">{error}</p>}
-      <button type="submit">{editingProduct ? 'Cập Nhật' : 'Thêm Sản Phẩm'}</button>
+      <button type="submit">{isEditing ? 'Cập Nhật' : 'Thêm Sản Phẩm'}</button>
     </form>
   );
 }
