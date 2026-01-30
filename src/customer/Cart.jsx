@@ -12,13 +12,24 @@ export default function Cart() {
     decreaseQty,
     addToCart,
     totalPrice,
+    clearCart,
   } = useContext(CartContext);
 
   const navigate = useNavigate();
 
+  const handleCheckout = () => {
+    if (cart.length === 0) return;
+
+    const confirmed = window.confirm("Xác nhận thanh toán giỏ hàng?");
+    if (confirmed) {
+      clearCart();
+      alert("Thanh toán thành công! Cảm ơn bạn.");
+      navigate("/customer");
+    }
+  };
+
   return (
     <div className="cart-page">
-
       {/* Back */}
       <button
         className="back-btn"
@@ -30,28 +41,21 @@ export default function Cart() {
       <h2>🛒 Giỏ hàng</h2>
 
       {/* Empty */}
-     {cart.length === 0 && (
-  <div className="cart-empty">
-
-    <div className="cart-empty-icon">
-      🛒
-    </div>
-
-    <h3>Giỏ hàng của bạn đang trống</h3>
-
-    <p>
-      Hãy thêm sản phẩm vào giỏ để tiếp tục mua sắm nhé!
-    </p>
-
-    <button
-      className="cart-empty-btn"
-      onClick={() => navigate("/customer")}
-    >
-      Tiếp tục mua sắm
-    </button>
-
-  </div>
-)}
+      {cart.length === 0 && (
+        <div className="cart-empty">
+          <div className="cart-empty-icon">🛒</div>
+          <h3>Giỏ hàng của bạn đang trống</h3>
+          <p>
+            Hãy thêm sản phẩm vào giỏ để tiếp tục mua sắm nhé!
+          </p>
+          <button
+            className="cart-empty-btn"
+            onClick={() => navigate("/customer")}
+          >
+            Tiếp tục mua sắm
+          </button>
+        </div>
+      )}
 
       {/* List */}
       {cart.map((item) => (
@@ -122,7 +126,6 @@ export default function Cart() {
       {/* Total */}
       {cart.length > 0 && (
         <div className="cart-total">
-
           <p>
             Tổng tiền:{" "}
             <span>
@@ -130,13 +133,11 @@ export default function Cart() {
             </span>
           </p>
 
-          <button className="checkout-btn">
+          <button className="checkout-btn" onClick={handleCheckout}>
             Thanh toán
           </button>
-
         </div>
       )}
-
     </div>
   );
 }

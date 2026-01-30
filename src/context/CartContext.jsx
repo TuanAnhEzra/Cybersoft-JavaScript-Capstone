@@ -50,6 +50,11 @@ export function CartProvider({ children }) {
     );
   };
 
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem("cart");
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -57,6 +62,7 @@ export function CartProvider({ children }) {
         addToCart,
         removeFromCart,
         decreaseQty,
+        clearCart,
 
         // Tổng số lượng
         totalQty: cart.reduce(
