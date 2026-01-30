@@ -220,3 +220,57 @@
   font-size: 18px;
   font-weight: 600;
 }
+
+/* ============ EMPTY CART ============ */
+
+.cart-empty {
+  background: white;
+
+  margin-top: 60px;
+  padding: 50px 30px;
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.cart-empty-icon {
+  font-size: 70px;
+  margin-bottom: 20px;
+}
+
+.cart-empty h3 {
+  font-size: 26px;
+  color: #111827;
+
+  margin-bottom: 10px;
+}
+
+.cart-empty p {
+  color: #6b7280;
+  margin-bottom: 25px;
+}
+
+.cart-empty-btn {
+  background: #2563eb;
+  color: white;
+
+  border: none;
+  border-radius: 10px;
+
+  padding: 12px 25px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.cart-empty-btn:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}

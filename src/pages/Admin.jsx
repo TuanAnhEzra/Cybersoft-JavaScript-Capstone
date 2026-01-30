@@ -3,7 +3,7 @@ import ProductForm from "../admin/ProductsForm";
 import ProductTable from "../admin/ProductTable";
 import { Link } from "react-router-dom";
 
-import "./admin.css";
+import "../assets/css/Admin.css";
 
 function Admin() {
   const [editingProduct, setEditingProduct] = useState(null);
@@ -11,6 +11,10 @@ function Admin() {
 
   const handleEdit = (product) => {
     setEditingProduct(product);
+  };
+
+  const handleClearEdit = () => {
+    setEditingProduct(null);
   };
 
   const handleRefresh = () => {
@@ -30,8 +34,8 @@ function Admin() {
 
           {/* Menu */}
           <nav className="nav-menu">
-            <Link to="/">Trang chủ</Link>
-            
+            <Link to="/">Home</Link>
+
           </nav>
 
         </div>
@@ -50,6 +54,7 @@ function Admin() {
             <ProductForm
               onRefresh={handleRefresh}
               editingProduct={editingProduct}
+              onClearEdit={handleClearEdit}
             />
           </div>
         </div>

@@ -67,6 +67,7 @@
   margin-right: 5px;
   padding: 5px 10px;
   cursor: pointer;
+  border: none;
 }
 
 .product-table button:first-child {
@@ -77,6 +78,46 @@
 .product-table button:last-child {
   background-color: #dc3545;
   color: white;
+}
+
+.main-header {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(135deg,#2563eb,#7c3aed);
+  padding: 15px 0;
+  z-index: 999;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-menu a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-menu a:hover {
+  text-decoration: underline;
+}
+
+.admin-title {
+  font-size: 32px;
+  font-weight: bold;
 }
 
 /* Responsive */
